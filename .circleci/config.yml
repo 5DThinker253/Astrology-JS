@@ -31,3 +31,14 @@ orbs:
       jobs:
         - python/test:
             setup:  /my-app |-- node_modules/ |-- public/     |-- index.html     |-- favicon.ico |-- src/     |-- components/         |-- Tarot/             |-- TarotCardGenerator.js         |-- Astrology/             |-- BirthChartGenerator.js         |-- HumanDesign/             |-- HumanDesignChartGenerator.js         |-- Numerology/             |-- NumerologyChartGenerator.js         |-- Journal/             |-- DailyAffirmations.js             |-- ReflectionSpace.js         |-- Auras/             |-- AurasExplanation.js         |-- Starseeds/             |-- StarseedsGenerator.js         |-- DoloresCannon/             |-- DoloresCannonBooks.js     |-- App.js     |-- index.js |-- package.json |-- webpack.config.js |-- .babelrc 
+            
+            orbs:
+  jq: circleci/jq@3.0.0
+  orbs:
+  node: circleci/node@5.1.0
+  workflows:
+    example-workflow:
+      jobs:
+        - node/test:
+            app-dir: BirthChartGenerator.js 
+            setup: import React, { useState } from 'react';  const BirthChartGenerator = () => {     const [chart, setChart] = useState(null);      const generateChart = () => {         // This is where your logic for generating a birth chart would go         // For now, we'll just use a placeholder         setChart('Sample Birth Chart');     };      return (         <div>             <h2>Birth Chart Generator</h2>             <button onClick={generateChart}>Generate Chart</button>             {chart && <p>Your Chart: {chart}</p>}         </div>     ); };  export default BirthChartGenerator; 
